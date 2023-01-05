@@ -1,21 +1,31 @@
 import { ApolloServer, gql } from "apollo-server";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
+import { users } from "./cloneDb.js";
+console.log(users, "userrs")
 
 const typeDefs = gql`
     type Query{
-        greet:String
-    }   
+        users:[User]
+    }
+    
+    type User {
+        id:String,
+        name:String,
+        surname:String,
+        class:String
+    }
 `
 
 const resolvers = {
     Query : {
-        greet:()=> "greetData"
+        users:()=> users
     }
 }
 
 const server  = new ApolloServer({
     typeDefs,
-    resolvers
+    resolvers,
+    plugins:[ApolloServerPluginLandingPageGraphQLPlayground()]
 })
 
 server.listen().then(({url})=>{
