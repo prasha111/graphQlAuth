@@ -3,13 +3,13 @@ import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-co
 
 const typeDefs = gql`
     type Query{
-        greet:string
+        greet:String
     }   
 `
 
 const resolvers = {
     Query : {
-        greet:()=> {console.log("hello world")}
+        greet:()=> "greetData"
     }
 }
 
