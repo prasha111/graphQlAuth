@@ -1,11 +1,12 @@
 import { ApolloServer, gql } from "apollo-server";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
-import { users } from "./cloneDb.js";
+import { users, quotes } from "./cloneDb.js";
 console.log(users, "userrs")
 
 const typeDefs = gql`
     type Query{
-        users:[User]
+        users:[User],
+        quotes:[Quote]
     }
     
     type User {
@@ -14,11 +15,18 @@ const typeDefs = gql`
         surname:String,
         class:String
     }
+
+    type Quote {
+            id:ID,
+            quote:String
+    }
+    
 `
 
 const resolvers = {
     Query : {
-        users:()=> users
+        users:()=> users,
+        quotes:()=> quotes
     }
 }
 
