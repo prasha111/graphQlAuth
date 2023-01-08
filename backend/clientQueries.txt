@@ -1,1 +1,42 @@
-//
+// Query to get all the element in the user array
+Query {
+    users{
+        id, 
+        name,
+        surname,
+        class
+    }
+}
+
+//Query to get the whole quotes array
+ Query {
+    quotes{
+        id,
+        quote
+    }
+ }
+
+ //Query to map all the User with thier quote
+ Query{
+    users{
+        id, 
+        name,
+        surname,
+        class,
+        quotes{
+            quote
+        }
+    }
+ }
+
+ //Query to get the details of the individual user details
+ Query{
+    user(id: $id){
+        id,
+        name, 
+        surname,
+        class
+    }
+ }
+
+ //Query 

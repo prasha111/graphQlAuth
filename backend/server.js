@@ -6,14 +6,17 @@ console.log(users, "userrs")
 const typeDefs = gql`
     type Query{
         users:[User],
-        quotes:[Quote]
+        user(id:ID!):User,
+        quotes:[Quote],
+        iquotes(id:ID!):[Quote]
     }
     
     type User {
-        id:String,
+        id:ID,
         name:String,
         surname:String,
-        class:String
+        class:String,
+        quotes:[Quote]
     }
 
     type Quote {
@@ -26,7 +29,12 @@ const typeDefs = gql`
 const resolvers = {
     Query : {
         users:()=> users,
-        quotes:()=> quotes
+        user:(parent,{id})=>users.find(user=> user.id == id),
+        quotes:()=> quotes,
+        iquotes:(parent, {id})=>quotes.filter(quote=> quote.id == id)
+    },
+    User:{
+        quotes:(ur)=>quotes.filter(quote=> quote.id == ur.id)
     }
 }
 
