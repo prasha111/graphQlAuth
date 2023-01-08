@@ -39,4 +39,33 @@ Query {
     }
  }
 
- //Query 
+ //Query to get the detail of the individual quote detail
+ Query{
+    iquote(id:$id){
+        id,
+        quote
+    }
+ }
+
+//Query Params
+Query getByQuoteId ($userId:ID!){
+    iquote(id:$id) {
+        id,
+        quote
+    }
+}
+query Params
+{
+    $userId:1
+}
+
+//Query to the creation of a user
+mutation createUser($userNew:userInput!){
+  signUpUserDummy(userNew:$userNew){
+    id,
+    name,
+    surname,
+    password
+    
+  }
+}
