@@ -1,0 +1,1 @@
+export const MONGO_URI = "mongodb+srv://prashant:12345@cluster0.j0djhph.mongodb.net/graphqldb?retryWrites=true&w=majority"

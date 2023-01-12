@@ -3,25 +3,29 @@ export const users = [
         id:1,
         name:'gulu',
         surname:'gulu',
-        email:'gulu@gmail.com'
+        email:'gulu@gmail.com',
+        password:"111"
     },
     {
         id:2,
         name:'kanu',
         surname:'sharma',
-        email:'kanu@gmail.com'
+        email:'kanu@gmail.com',
+        password:'222'
     },
     {
         id:3,
         name:'lakh',
         surname:'gera',
-        email:'lakh@gmail.com'
+        email:'lakh@gmail.com',
+        password:'333'
     },
     {
         id:4,
         name:'rashmi',
         surname:'pilo',
-        email:'rashmi@gmail.com'
+        email:'rashmi@gmail.com',
+        password:'444'
     }
 ]
 export const quotes = [

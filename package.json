@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/prasha111/graphQlAuth/issues"
   },
-  "homepage": "https://github.com/prasha111/graphQlAuth#readme"
+  "homepage": "https://github.com/prasha111/graphQlAuth#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.8.3"
+  }
 }
