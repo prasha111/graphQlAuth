@@ -23,6 +23,7 @@ const typeDefs = gql`
     }
     type Mutation {
         signUpUserDummy(userNew:userInput!):User
+        signUpUser(userNew:userInput!):User
     }
     input userInput {
         name:String!, 

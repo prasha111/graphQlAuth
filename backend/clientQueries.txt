@@ -1,7 +1,7 @@
 // Query to get all the element in the user array
 Query {
     users{
-        id, 
+        _id, 
         name,
         surname,
         class
@@ -11,7 +11,7 @@ Query {
 //Query to get the whole quotes array
  Query {
     quotes{
-        id,
+        _id,
         quote
     }
  }
@@ -19,7 +19,7 @@ Query {
  //Query to map all the User with thier quote
  Query{
     users{
-        id, 
+        _id, 
         name,
         surname,
         class,
@@ -29,28 +29,28 @@ Query {
     }
  }
 
- //Query to get the details of the individual user details
+ //Query to get the details of the indiv_idual user details
  Query{
-    user(id: $id){
-        id,
+    user(_id: $_id){
+        _id,
         name, 
         surname,
         class
     }
  }
 
- //Query to get the detail of the individual quote detail
+ //Query to get the detail of the indiv_idual quote detail
  Query{
-    iquote(id:$id){
-        id,
+    iquote(_id:$_id){
+        _id,
         quote
     }
  }
 
 //Query Params
 Query getByQuoteId ($userId:ID!){
-    iquote(id:$id) {
-        id,
+    iquote(_id:$_id) {
+        _id,
         quote
     }
 }
@@ -62,7 +62,7 @@ query Params
 //Query to the creation of a user
 mutation createUser($userNew:userInput!){
   signUpUserDummy(userNew:$userNew){
-    id,
+    _id,
     name,
     surname,
     password

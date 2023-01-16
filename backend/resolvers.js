@@ -1,24 +1,39 @@
 import { randomBytes } from "crypto";
 import { quotes,users } from "./cloneDb.js";
-
+import mongoose from "mongoose";
+const User =  mongoose.model("User")
+import bcrypt from 'bcryptjs'
 const resolvers = {
     Query : {
         users:()=> users,
-        user:(parent,{id})=>users.find(user=> user.id == id),
+        user:(parent,{_id})=>users.find(user=> user._id == _id),
         quotes:()=> quotes,
-        iquotes:(parent, {id})=>quotes.filter(quote=> quote.id == id)
+        iquotes:(parent, {_id})=>quotes.filter(quote=> quote._id == _id)
     },
     User:{
-        quotes:(ur)=>quotes.filter(quote=> quote.id == ur.id)
+        quotes:(ur)=>quotes.filter(quote=> quote._id == ur._id)
     },
     Mutation:{
         signUpUserDummy:(parent, {userNew})=>{
-            const id = randomBytes(5).toString("hex")
+            const _id = randomBytes(5).toString("hex")
             users.push({
-                id,
+                _id,
                 ...userNew
             })
-            return users.find(user=>user.id == id)
+            return users.find(user=>user._id == _id)
+        },
+        signUpUser:async(____, {userNew})=>{
+            const user =  await User.findOne({email:userNew.email})
+            if(user){
+                throw new error ("User already exist with that mail")
+            }
+            const hashedPassword  =  await bcrypt.hash(userNew.password, 12)
+            const newUser = new User ({
+                ...userNew,
+                password:hashedPassword
+            })
+            
+            return await newUser.save();
         }
     }
 }
