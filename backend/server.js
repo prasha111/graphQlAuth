@@ -5,7 +5,7 @@ import typeDefs from "./scehmaGql.js";
 
 //console.log(users, "userrs")
 import mongoose from "mongoose";
-import { MONGO_URI } from "./config.js";
+import { JWT_SECRET, MONGO_URI } from "./config.js";
 //mongodb+srv://prashant:<password>@cluster0.j0djhph.mongodb.net/?retryWrites=true&w=majority 
 //database url
 
@@ -20,12 +20,20 @@ mongoose.connection.on("error", (err)=>{
     console.log("errorNotConnectedToDatabase", err )
 })
 import "./models/User.js";
-import "./models/Quotes.js";
+import "./models/Quote.js";
 //import models
 import resolvers from "./resolvers.js";
+import  jwt  from 'jsonwebtoken';
 const server  = new ApolloServer({
     typeDefs,
     resolvers,
+    context:({req})=>{
+        const { authorization } = req.headers;
+        if(authorization){
+         const {userId} = jwt.verify(authorization,JWT_SECRET)
+         return {userId}
+        }
+    },
     plugins:[ApolloServerPluginLandingPageGraphQLPlayground()]
 })
 

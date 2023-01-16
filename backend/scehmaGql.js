@@ -3,7 +3,7 @@ import {  gql } from "apollo-server";
 const typeDefs = gql`
     type Query{
         users:[User],
-        user(_id:ID!):User,
+        user(_id:ID!):User
         quotes:[Quote],
         iquotes(_id:ID!):[Quote]
     }
@@ -11,9 +11,9 @@ const typeDefs = gql`
     type User {
         _id:ID,
         name:String,
-        surname:String,
-        email: String,
-        password:String,
+        surname:String
+        email: String
+        password:String
         quotes:[Quote]
     }
 
@@ -28,15 +28,16 @@ const typeDefs = gql`
         signUpUserDummy(userNew:userInput!):User
         signUpUser(userNew:userInput!):User
         signinUser(userSignin:UserSigninInput!):Token
+        createQuote(name:String!):String
     }
     input userInput {
-        name:String!, 
-        surname:String!, 
-        email:String!, 
+        name:String!
+        surname:String!
+        email:String!
         password:String!
     }
     input UserSigninInput{
-        email:String!,
+        email:String!
         password:String!
      }
     

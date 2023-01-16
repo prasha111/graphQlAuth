@@ -2,6 +2,7 @@ import { randomBytes } from "crypto";
 import { quotes,users } from "./cloneDb.js";
 import mongoose from "mongoose";
 const User =  mongoose.model("User")
+const Quote = mongoose.model("Quote")
 import bcrypt from 'bcryptjs'
 //import { Jwt } from "jsonwebtoken";
 import { JWT_SECRET } from "./config.js";
@@ -50,6 +51,15 @@ const resolvers = {
             const token = jwt.sign({userId:user._id},JWT_SECRET)
             return {token}
            },
+           createQuote:async (_,{name},{userId})=>{
+            if(!userId) throw new Error("You must be logged in")
+            const newQuote = new Quote({
+                quotes:name,
+                id:userId
+            })
+            await newQuote.save()
+            return "Quote saved successfully"
+         }
     }
 }
 export default resolvers
