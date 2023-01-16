@@ -3,13 +3,13 @@ import {  gql } from "apollo-server";
 const typeDefs = gql`
     type Query{
         users:[User],
-        user(id:ID!):User,
+        user(_id:ID!):User,
         quotes:[Quote],
-        iquotes(id:ID!):[Quote]
+        iquotes(_id:ID!):[Quote]
     }
     
     type User {
-        id:ID,
+        _id:ID,
         name:String,
         surname:String,
         email: String,
@@ -18,7 +18,7 @@ const typeDefs = gql`
     }
 
     type Quote {
-            id:ID,
+            _id:ID,
             quote:String
     }
     type Mutation {
