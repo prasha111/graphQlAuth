@@ -3,6 +3,9 @@ import { quotes,users } from "./cloneDb.js";
 import mongoose from "mongoose";
 const User =  mongoose.model("User")
 import bcrypt from 'bcryptjs'
+//import { Jwt } from "jsonwebtoken";
+import { JWT_SECRET } from "./config.js";
+import jwt from 'jsonwebtoken';
 const resolvers = {
     Query : {
         users:()=> users,
@@ -22,7 +25,7 @@ const resolvers = {
             })
             return users.find(user=>user._id == _id)
         },
-        signUpUser:async(____, {userNew})=>{
+        signUpUser:async (____, {userNew})=>{
             const user =  await User.findOne({email:userNew.email})
             if(user){
                 throw new error ("User already exist with that mail")
@@ -34,7 +37,19 @@ const resolvers = {
             })
             
             return await newUser.save();
-        }
+        },
+        signinUser:async (_,{userSignin})=>{
+            const user = await User.findOne({email:userSignin.email})
+            if(!user){
+                throw new Error("User dosent exists with that email")
+            }
+            const doMatch =await bcrypt.compare(userSignin.password, user.password)
+            if(!doMatch){
+                throw new Error("email or password in invalid")
+            }
+            const token = jwt.sign({userId:user._id},JWT_SECRET)
+            return {token}
+           },
     }
 }
 export default resolvers

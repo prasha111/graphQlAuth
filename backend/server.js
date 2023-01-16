@@ -13,13 +13,13 @@ mongoose.connect(MONGO_URI,{
     useNewUrlParser:true,
     useUnifiedTopology:true
 })
-mongoose.connection.on("connected", ()=>{
-    console.log("connectedToDataBase" )
+mongoose.connection.on("connected", (res)=>{
+    console.log("connectedToDataBase", res )
 })
 mongoose.connection.on("error", (err)=>{
     console.log("errorNotConnectedToDatabase", err )
 })
-import "./models/Users.js";
+import "./models/User.js";
 import "./models/Quotes.js";
 //import models
 import resolvers from "./resolvers.js";

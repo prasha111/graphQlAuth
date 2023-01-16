@@ -21,9 +21,13 @@ const typeDefs = gql`
             _id:ID,
             quote:String
     }
+    type Token {
+        token:String
+    }
     type Mutation {
         signUpUserDummy(userNew:userInput!):User
         signUpUser(userNew:userInput!):User
+        signinUser(userSignin:UserSigninInput!):Token
     }
     input userInput {
         name:String!, 
@@ -31,6 +35,10 @@ const typeDefs = gql`
         email:String!, 
         password:String!
     }
+    input UserSigninInput{
+        email:String!,
+        password:String!
+     }
     
 `
 
